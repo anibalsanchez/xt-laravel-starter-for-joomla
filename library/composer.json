@@ -1,0 +1,38 @@
+    {
+      "name": "extly/xtlumen",
+      "description": "XT Lumen Library.",
+      "keywords": [
+        "framework",
+        "laravel",
+        "lumen",
+        "joomla"
+      ],
+      "license": "GPL3",
+      "type": "project",
+      "require": {
+        "php": ">=7.1.3",
+        "laravel/lumen-framework": "5.8.*"
+      },
+      "require-dev": {
+        "fzaninotto/faker": "^1.4",
+        "phpunit/phpunit": "^7.0",
+        "mockery/mockery": "^1.0"
+      },
+      "autoload": {
+        "psr-4": {
+          "Extly\\": "src/"
+        }
+      },
+      "autoload-dev": {
+        "classmap": [
+          "tests/"
+        ]
+      },
+      "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+      },
+      "minimum-stability": "dev",
+      "prefer-stable": true
+    }

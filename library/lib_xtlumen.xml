@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension method="upgrade" type="library" version="1.0">
+  <name>XT Lumen Library</name>
+  <libraryname>xtlumen</libraryname>
+  <version>1.0.0</version>
+  <creationDate>2019-07-21</creationDate>
+
+	<author>Extly, CB</author>
+	<authorEmail>team@extly.com</authorEmail>
+	<authorUrl>https://www.extly.com</authorUrl>
+	<copyright>Copyright (c)2007-2019 Extly, CB All rights reserved.</copyright>
+	<license>GNU/GPLv3 www.gnu.org/licenses/gpl-3.0.html</license>
+
+  <description>
+    <![CDATA[
+Laravel Lumen Boilerplate for Joomla.
+  ]]>
+  </description>
+  <files>
+    <folder>bootstrap</folder>
+    <folder>routes</folder>
+    <folder>src</folder>
+    <folder>vendor</folder>
+    <filename>composer.json</filename>
+    <filename>lib_xtlumen.xml</filename>
+  </files>
+</extension>
