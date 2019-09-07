@@ -20,12 +20,11 @@
       },
       "autoload": {
         "psr-4": {
-          "Extly\\": "src/"
+          "App\\": "src/"
         }
       },
       "autoload-dev": {
         "classmap": [
-          "tests/"
         ]
       },
       "config": {

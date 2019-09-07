@@ -10,6 +10,8 @@
  * @see         https://www.extly.com
  */
 
+use App\Facades\JApplication as JApplicationFacade;
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
@@ -27,7 +29,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$app = new Laravel\Lumen\Application(
+$app = new App\JApplication(
     dirname(__DIR__)
 );
 
@@ -105,5 +107,7 @@ $app->router->group([
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });
+
+JApplicationFacade::swap($app);
 
 return $app;

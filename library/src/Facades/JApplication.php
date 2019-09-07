@@ -10,25 +10,20 @@
  * @see         https://www.extly.com
  */
 
-namespace App\Listeners;
+namespace App\Facades;
 
-use App\Events\ExampleEvent;
+use App\JApplication as JApplicationCore;
+use Illuminate\Support\Facades\Facade;
 
-class ExampleListener
+class JApplication extends Facade
 {
     /**
-     * Create the event listener.
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     * Handle the event.
+     * Get the registered name of the component.
      *
-     * @param ExampleEvent $event
+     * @return string
      */
-    public function handle(ExampleEvent $event)
+    protected static function getFacadeAccessor()
     {
+        return JApplicationCore::class;
     }
 }

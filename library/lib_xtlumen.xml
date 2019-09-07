@@ -18,9 +18,12 @@ Laravel Lumen Boilerplate for Joomla.
   </description>
   <files>
     <folder>bootstrap</folder>
+    <folder>resources</folder>
     <folder>routes</folder>
     <folder>src</folder>
+    <folder>storage</folder>
     <folder>vendor</folder>
+    <filename>.env</filename>
     <filename>composer.json</filename>
     <filename>lib_xtlumen.xml</filename>
   </files>

@@ -10,7 +10,7 @@
  * @see         https://www.extly.com
  */
 
-namespace XTLumen\App\Console;
+namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;

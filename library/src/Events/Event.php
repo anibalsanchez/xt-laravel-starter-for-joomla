@@ -10,7 +10,7 @@
  * @see         https://www.extly.com
  */
 
-namespace XTLumen\App\Events;
+namespace App\Events;
 
 use Illuminate\Queue\SerializesModels;
 

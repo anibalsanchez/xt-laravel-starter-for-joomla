@@ -10,7 +10,7 @@
  * @see         https://www.extly.com
  */
 
-namespace XTLumen\App;
+namespace App;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;

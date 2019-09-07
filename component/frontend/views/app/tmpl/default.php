@@ -10,15 +10,10 @@
  * @see         https://www.extly.com
  */
 
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Layout\FileLayout;
+use App\Facades\JApplication;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 defined('_JEXEC') or die;
 
-HTMLHelper::_('script', 'com_xtlumen/script.js', ['version' => 'auto', 'relative' => true]);
-HTMLHelper::_('stylesheet', 'com_xtlumen/style.css', ['version' => 'auto', 'relative' => true]);
-
-$layout = new FileLayout('xtlumen.page');
-$data = new stdClass();
-$data->text = 'Hello Joomla!';
-echo $layout->render($data);
+$aRequest = SymfonyRequest::create('/', 'GET', [], [], [], [], null);
+JApplication::run($aRequest);

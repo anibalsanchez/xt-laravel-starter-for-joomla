@@ -29,6 +29,8 @@ use Joomla\CMS\MVC\Controller\BaseController;
 
 defined('_JEXEC') or die;
 
+$theJApplication = require_once JPATH_LIBRARIES.'/xtlumen/bootstrap/app.php';
+
 $controller = BaseController::getInstance('xtlumen');
 $controller->execute(Factory::getApplication()->input->get('task'));
 $controller->redirect();

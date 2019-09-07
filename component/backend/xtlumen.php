@@ -35,7 +35,7 @@ if (!Factory::getUser()->authorise('core.manage', 'com_xtlumen')) {
     throw new InvalidArgumentException(Text::_('JERROR_ALERTNOAUTHOR'), 404);
 }
 
-require_once JPATH_LIBRARIES.'/xtlumen/bootstrap/app.php';
+$theJApplication = require_once JPATH_LIBRARIES.'/xtlumen/bootstrap/app.php';
 
 require_once JPATH_COMPONENT_ADMINISTRATOR.'/helpers/xtlumen.php';
 

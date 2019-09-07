@@ -26,12 +26,10 @@ class XTLumenHelper
      *
      * @param string $vName the name of the current view
      *
-     * @return void
-     *
      * @since   1.0
      */
     public function addSubmenu($vName)
     {
-        JHtmlSidebar::addEntry(Text::_('COM_XTLUMEN'), 'index.php?option=com_xtlumen&view=xtlumen', 'xtlumen' === $vName);
+        JHtmlSidebar::addEntry(Text::_('COM_XTLUMEN'), 'index.php?option=com_xtlumen&view=app', 'xtlumen' === $vName);
     }
 }

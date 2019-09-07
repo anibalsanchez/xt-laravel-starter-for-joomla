@@ -10,7 +10,7 @@
  * @see         https://www.extly.com
  */
 
-namespace XTLumen\App\Jobs;
+namespace App\Jobs;
 
 class ExampleJob extends Job
 {

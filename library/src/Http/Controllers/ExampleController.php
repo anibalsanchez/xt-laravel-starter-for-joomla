@@ -10,7 +10,7 @@
  * @see         https://www.extly.com
  */
 
-namespace XTLumen\App\Http\Controllers;
+namespace App\Http\Controllers;
 
 class ExampleController extends Controller
 {
