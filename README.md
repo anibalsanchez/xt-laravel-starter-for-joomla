@@ -1,5 +1,13 @@
 # Laravel Lumen Boilerplate for Joomla
 
+Sample extension for Joomla. Based on Extly build files. Includes Laravel Lumen, Vue.js and Tailwind CSS.
+
+Based on the following previous work:
+
+- [anibalsanchez/extly-buildfiles-for-joomla](https://github.com/anibalsanchez/extly-buildfiles-for-joomla)
+- [anibalsanchez/XT-TailwindCSS-Starter](https://github.com/anibalsanchez/XT-TailwindCSS-Starter)
+- [anibalsanchez/XT-Tailwind-for-Joomla](https://github.com/anibalsanchez/XT-Tailwind-for-Joomla)
+
 ## tl;dr
 
 The **Laravel** ecosystem is currently one of the most popular solutions in the PHP world. The original Laravel library has gone from being a simple library to a complete organization of libraries and associated services. Once you start implementing a part of Laravel, you fall into the rabbit hole, and you never know how much Laravel technology you are going to adopt. In addition to the basic set of services, the common practice at Laravel often associates other well-known technologies such as Redis, Vue.js or Tailwind CSS.
@@ -26,5 +34,5 @@ For more information: <https://blog.anibalhsanchez.com/en/8-blogging/56-to-begin
 
 ## Copyright
 
-- Copyright (c)2007-2019 Andrea Gentil - Anibal Sanchez. All rights reserved.
-- Distributed under the GNU General Public License version 2 or later
+- Copyright (c)2012-2020 Andrea Gentil - Anibal Sanchez. All rights reserved.
+- Distributed under the GNU General Public License version 3 or later
