@@ -1,29 +1,22 @@
 # Project management
+.vscode/
 .editorconfig
 .eslintrc.json
-.idea
 .jsbeautifyrc
 .jshintrc
 .markdownlint.json
-.php_cs
-.php_cs.dist
-.vagrant
-.vscode
 jsconfig.json
+.php_cs.dist
+.php_cs
 
 # Composer
 composer.phar
+vendor_prefixed/
 vendor/
 composer.lock
 
 # Node.js
 node_modules/
-
-# Cordova
-/hooks/
-/platforms/
-#/plugins/
-/typings/
 
 # Build files - Release directory
 /build/release
@@ -43,18 +36,3 @@ node_modules/
 /component/language/*
 /modules/*/*/language/*
 /plugins/*/*/language/*
-
-# Ionic
-.sourcemaps/
-tslint.json
-/www/assets/*
-/www/build/*
-
-# App for Joomla
-/component/media/app/
-/component/media/service/
-
-# Symfony
-/var/
-
-# Symlinks

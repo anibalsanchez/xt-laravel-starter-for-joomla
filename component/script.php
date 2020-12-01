@@ -1,10 +1,10 @@
 <?php
 /**
- * @package    XT Lumen
+ * @package    Foo Name
  *
  * @author     Extly, CB <team@extly.com>
- * @copyright  Copyright (c)2007-2019 Extly, CB All rights reserved.
- * @license    GNU General Public License version 3 or later; see LICENSE.txt
+ * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
  * @link       https://www.extly.com
  */
 
@@ -28,12 +28,12 @@ use Joomla\CMS\Installer\InstallerAdapter as CMSPluginAdapter;
 defined('_JEXEC') or die;
 
 /**
- * XTLumen script file.
+ * Foo script file.
  *
  * @package     A package name
  * @since       1.0
  */
-class Com_XTLumenInstallerScript
+class Com_FooInstallerScript
 {
 	/**
 	 * Constructor

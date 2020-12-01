@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension method="upgrade" type="library" version="1.0">
+  <name>[EXTENSION_NAME] Library</name>
+  <libraryname>[EXTENSION_ALIAS]</libraryname>
+  <version>[RELEASE_VERSION]</version>
+  <creationDate>[DATE]</creationDate>
+
+[MANIFEST_COPYRIGHT]
+
+  <description>
+    <![CDATA[
+[EXTENSION_DESC]
+  ]]>
+  </description>
+	<media destination="lib_[EXTENSION_ALIAS]" folder="media">
+		<folder>public</folder>
+	</media>
+  <files>
+    <filename>lib_[EXTENSION_ALIAS].xml</filename>
+
+    <filename>artisan</filename>
+    <filename>composer.json</filename>
+    <filename>composer.lock</filename>
+    <filename>lib_foo.xml</filename>
+    <filename>package-lock.json</filename>
+    <filename>package.json</filename>
+    <filename>phpunit.xml</filename>
+    <filename>server.php</filename>
+    <filename>tailwind.config.js</filename>
+    <filename>webpack.mix.js</filename>
+
+    <folder>app</folder>
+    <folder>bootstrap</folder>
+    <folder>config</folder>
+    <folder>database</folder>
+    <folder>resources</folder>
+    <folder>routes</folder>
+    <folder>vendor</folder>
+    <folder>vendor_prefixed</folder>
+  </files>
+</extension>

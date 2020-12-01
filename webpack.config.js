@@ -3,60 +3,60 @@
  *
  * @license   License GNU General Public License version 2 or later; see LICENSE.txt
  * @author    Andrea Gentil - Anibal Sanchez <team@extly.com>
- * @copyright (c)2007-2018 Extly, CB. All rights reserved.
+ * @copyright (c)2012-2020 Extly, CB. All rights reserved.
  *
  */
 
-// Array of Generation plugins
-var buildPlugins = [];
+// Array of Webpack plugins
+let buildPlugins = [];
 
 // Extension directories to be visited
-var packageTypeDir = 'package';
-var extensionTypesDirs = ['component', 'modules', 'plugins', 'file', 'template', 'library', 'platform'];
+const packageTypeDir = 'package';
+const extensionTypesDirs = [
+  'component',
+  'modules',
+  'plugins',
+  'file',
+  'template',
+  'library',
+  'platform',
+];
 
-// Required plugins
-const path = require('path');
-const ZipFilesPlugin = require('webpack-zip-files-plugin');
+// Only template xml are processed, other xml config files are ignored
+const packageIgnoreFiles = ['config.xml'];
+
+// WARNING - Clean these development folders before building
+const globalCleanDevAssets = [
+  /\/node_modules\//,
+];
+
+// Required Webpack plugins
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const readDirRecursive = require('fs-readdir-recursive');
+const Dotenv = require('dotenv-webpack');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 const fs = require('fs');
 const fsExtra = require('fs-extra');
-const Dotenv = require('dotenv-webpack');
 const moment = require('moment');
+const path = require('path');
+const readDirRecursive = require('fs-readdir-recursive');
+const ZipFilesPlugin = require('webpack-zip-files-plugin');
+const glob = require("glob");
+const touch = require("touch")
 
-var definitions;
-var releaseDate = moment().format('YYYY-MM-DD');
-var year = moment().format('YYYY');
-var releaseDir = 'build/release';
-var releaseDirAbs = path.resolve(__dirname, releaseDir);
-var templatesDir = 'build/templates';
-var translationsDir = 'build/translations';
-var packageDirAbs = path.resolve(__dirname, packageTypeDir);
+let definitions;
+const releaseDate = moment()
+  .format('YYYY-MM-DD');
+const year = moment()
+  .format('YYYY');
+const releaseDir = 'build/release';
+const releaseDirAbs = path.resolve(__dirname, releaseDir);
+const templatesDir = 'build/templates';
+const translationsDir = 'build/translations';
+const packageDirAbs = path.resolve(__dirname, packageTypeDir);
+const renderDirectories = [templatesDir, translationsDir];
+const allExtensionTypesDirs = extensionTypesDirs.concat([packageTypeDir]);
 
-function loadEnvironmentDefinitions() {
-  var defs = {};
-
-  var env = new Dotenv();
-  Object.keys(env.definitions).forEach((definition) => {
-    var key = definition.replace('process.env.', '');
-    var value = env.definitions[definition];
-
-    value = value.replace(/^"(.+(?="$))"$/, '$1');
-    value = value.replace(/%CR%/g, '\n');
-    value = value.replace(/%TAB%/g, '\t');
-
-    defs[key] = value;
-  });
-
-  return defs;
-}
-
-function removeReleaseDirectory() {
-  fsExtra.removeSync(releaseDirAbs);
-  fs.mkdirSync(releaseDirAbs);
-}
-
-var tagTransformation = content => content
+const tagTransformation = (content) => content
   .toString()
   .replace(/\[MANIFEST_COPYRIGHT\]/g, definitions.MANIFEST_COPYRIGHT)
   .replace(/; \[TRANSLATION_COPYRIGHT\]/g, definitions.TRANSLATION_COPYRIGHT)
@@ -79,25 +79,112 @@ var tagTransformation = content => content
   .replace(/\[DATE\]/g, releaseDate)
   .replace(/\[YEAR\]/g, year);
 
+function loadEnvironmentDefinitions() {
+  const defs = {};
+
+  const env = new Dotenv();
+  Object.keys(env.definitions)
+    .forEach((definition) => {
+      const key = definition.replace('process.env.', '');
+      let value = env.definitions[definition];
+
+      value = value.replace(/^"(.+(?="$))"$/, '$1');
+      value = value.replace(/%CR%/g, '\n');
+      value = value.replace(/%TAB%/g, '\t');
+
+      defs[key] = value;
+    });
+
+  return defs;
+}
+
+function cleanDevAssets() {
+  const cleanDevAssetsDirs = allExtensionTypesDirs.map(
+      // Read all files
+      (extensionTypesDir) => glob.sync(
+        path.resolve(__dirname, extensionTypesDir) + '/**/*', {
+          dot: true
+        }
+      )
+    )
+    // One flat array
+    .flat()
+    // Filter to files that match the globalCleanDevAssets to clean
+    .filter((item) => {
+      return globalCleanDevAssets.find((globalCleanDevFolder) => {
+        return globalCleanDevFolder.test(item);
+      });
+    });
+
+  cleanDevAssetsDirs.map((file) => fsExtra.removeSync(file));
+}
+
+function removeReleaseDirectory() {
+  return new FileManagerPlugin({
+    onStart: {
+      delete: [
+        releaseDirAbs,
+      ],
+      mkdir: [
+        releaseDirAbs,
+      ],
+    }
+  });
+}
+
+function discoverFilesToRender(tplDirectory, extensionType) {
+  const tplPath = `${tplDirectory}/${extensionType}/`;
+  const absTplPath = `${__dirname}/${tplPath}`;
+
+  return glob.sync(
+      path.resolve(__dirname, `${tplPath}**/*.@(ini|xml|php|css|js)`),
+    )
+    .map(
+      (file) => file.replace(absTplPath, '')
+    );
+}
+
+function discoverManifestTemplates(tplDirectory, extensionType) {
+  const tplPath = `${tplDirectory}/${extensionType}/`;
+  const absTplPath = `${__dirname}/${tplPath}`;
+
+  return glob.sync(
+      path.resolve(__dirname, `${tplPath}**/*.xml`),
+    )
+    .map(
+      (file) => file.replace(absTplPath, '')
+    );
+}
+
+function resolveExtensionTemplate(tplDirectory, extensionType) {
+  return path.resolve(
+    __dirname,
+    `${tplDirectory}/${extensionType}`,
+  );
+}
+
 function renderTemplates() {
-  var renderTpls = [];
-  var tplDirectories = [templatesDir, translationsDir];
-  var allExtensionTypes = extensionTypesDirs.concat([packageTypeDir]);
+  const renderTpls = [];
 
-  tplDirectories.forEach((tplDirectory) => {
-    allExtensionTypes.forEach((extensionType) => {
-      var extTplDir = path.resolve(__dirname, `${tplDirectory}/${extensionType}`);
-      var templates = readDirRecursive(path.resolve(__dirname, `${tplDirectory}/${extensionType}`));
+  // For templates and translation directories
+  renderDirectories.forEach((tplDirectory) => {
+    // For all extension types, including the package
+    allExtensionTypesDirs.forEach((extensionType) => {
+      const extTplDir = resolveExtensionTemplate(tplDirectory, extensionType);
+      const templates = discoverFilesToRender(tplDirectory, extensionType);
+      // const templatesDeprecated = discoverTemplateDeprecated(tplDirectory, extensionType);
 
+      // For each template
       templates.forEach((file) => {
-        var dest = path.resolve(__dirname, `${extensionType}/${file}`);
-        var item = {
+        const dest = path.resolve(__dirname, `${extensionType}/${file}`);
+        const item = {
           context: extTplDir,
           from: file,
           to: dest,
           transform: tagTransformation,
         };
 
+        // Render each template
         renderTpls.push(item);
       });
     });
@@ -107,10 +194,11 @@ function renderTemplates() {
 }
 
 function isPackageType() {
-  var packageMode = false;
+  let packageMode = false;
 
   try {
-    packageMode = fs.lstatSync(packageDirAbs).isDirectory();
+    packageMode = fs.lstatSync(packageDirAbs)
+      .isDirectory();
   } catch (e) {
     console.log('Package definition not detected.');
   }
@@ -118,43 +206,74 @@ function isPackageType() {
   return packageMode;
 }
 
-function generatePackage() {
-  var pkgEntries = [];
+function declarePackageGeneration() {
+  const packageDirAbsBar = `${packageDirAbs}/`;
 
   // Include all files from the package directory
-  var pkgFiles = readDirRecursive(packageDirAbs);
+  const pkgFiles = glob.sync(`${packageDirAbsBar}**/*`)
+    .map(
+      (file) => file.replace(packageDirAbsBar, '')
+    );
 
-  pkgFiles.forEach((file) => {
-    var packageFile = path.resolve(packageDirAbs, file);
+  // Discover extensions to be included
+  const pkgEntries = pkgFiles.map((file) => {
+    const packageFile = path.resolve(packageDirAbs, file);
 
-    var item = {
+    return {
       src: packageFile,
     };
-
-    pkgEntries.push(item);
   });
+
+  const folders = new Map();
 
   // Add all extension types directories into the package
   extensionTypesDirs.forEach((extensionTypeDir) => {
-    var extTemplates = readDirRecursive(path.resolve(__dirname, `${templatesDir}/${extensionTypeDir}`));
+    const extTemplates = discoverManifestTemplates(templatesDir, extensionTypeDir);
 
     extTemplates.forEach((extTemplate) => {
-      var srcFile = path.resolve(__dirname, `${extensionTypeDir}/${extTemplate}`);
-      var srcDir = path.dirname(srcFile);
+      // Exclude discovered files that are not xml
+      if (!extTemplate.endsWith('.xml')) {
+        return null;
+      }
 
-      var item = {
+      const extTemplateFile = path.parse(extTemplate)
+        .base;
+
+      // It is already included, continue with the rest of the files
+      if (packageIgnoreFiles.includes(extTemplateFile)) {
+        return;
+      }
+
+      // Prepare the folder to be included
+      const srcFile = path.resolve(
+        __dirname,
+        `${extensionTypeDir}/${extTemplate}`,
+      );
+      const srcDir = path.dirname(srcFile);
+      const distKey = path.basename(srcDir);
+
+      const item = {
         src: srcDir,
-        dist: path.basename(srcDir),
+        dist: distKey,
       };
 
-      pkgEntries.push(item);
+      // Ignore if it has already been included
+      if (!folders.has(srcDir)) {
+        folders.set(srcDir, item);
+      }
     });
   });
 
-  // Complete the definition of the zip file
-  var outputFile = path.resolve(__dirname, `${releaseDir}/pkg_${definitions.EXTENSION_ALIAS}_v${definitions.RELEASE_VERSION}`);
+  // All discovered folders to be included
+  pkgEntries.push(...folders.values());
 
-  var zipFile = {
+  // Complete the definition of the zip file
+  const outputFile = path.resolve(
+    __dirname,
+    `${releaseDir}/pkg_${definitions.EXTENSION_ALIAS}_v${definitions.RELEASE_VERSION}`,
+  );
+
+  const zipFile = {
     entries: pkgEntries,
     output: outputFile,
     format: 'zip',
@@ -163,49 +282,57 @@ function generatePackage() {
   return new ZipFilesPlugin(zipFile);
 }
 
-function generateZips() {
-  var zipDirectories = [templatesDir];
-  var zipPlugins = [];
+function declareZipsGeneration() {
+  const zipDirectories = [templatesDir];
+  const zipPlugins = [];
 
+  // For each templates directory to be zipped
   zipDirectories.forEach((tplDirectory) => {
+    // For all extension types
     extensionTypesDirs.forEach((extensionType) => {
-      var extZipDir = path.resolve(__dirname, `${tplDirectory}/${extensionType}`);
-      var templates = readDirRecursive(path.resolve(__dirname, `${tplDirectory}/${extensionType}`));
+      const extZipDir = resolveExtensionTemplate(tplDirectory, extensionType);
+      const templates = discoverFilesToRender(tplDirectory, extensionType);
 
+      // For each template
       templates.forEach((tplFile) => {
-        var srcFile = path.resolve(__dirname, `${extensionType}/${tplFile}`);
-        var srcDir = path.dirname(srcFile);
-        var extname = path.extname(srcFile);
+        const srcFile = path.resolve(__dirname, `${extensionType}/${tplFile}`);
+        const srcDir = path.dirname(srcFile);
+        const extname = path.extname(srcFile);
 
         if (extname !== '.xml') return;
 
-        var manifestTplFile = `${extZipDir}/${tplFile}`;
-        var extensionTplDir = path.dirname(manifestTplFile);
-        var parts = extensionTplDir.split('/');
-        var extElement = parts.pop();
+        const manifestTplFile = `${extZipDir}/${tplFile}`;
+        const extensionTplDir = path.dirname(manifestTplFile);
+        const parts = extensionTplDir.split('/');
+        const extElement = parts.pop();
 
-        var renamedExtElement = extElement;
+        let renamedExtElement = extElement;
 
+        // The component must be renamed to the extension alias
         if (renamedExtElement === 'component') {
           renamedExtElement = definitions.EXTENSION_ALIAS;
+
+          // The file extension goes to the cli
         } else if (renamedExtElement === 'file') {
           renamedExtElement = 'cli';
         }
 
-        var outputFile = path.resolve(__dirname, `${releaseDir}/${renamedExtElement}_v${definitions.RELEASE_VERSION}`);
+        const outputFile = path.resolve(
+          __dirname,
+          `${releaseDir}/${renamedExtElement}_v${definitions.RELEASE_VERSION}`,
+        );
 
-        var zipFile = {
-          entries: [
-            {
-              src: srcDir,
-              dist: extElement,
-            },
-          ],
+        const zipFile = {
+          entries: [{
+            src: srcDir,
+            dist: extElement,
+          }],
           output: outputFile,
           format: 'zip',
         };
 
-        var itemZip = new ZipFilesPlugin(zipFile);
+        // Define the zip
+        const itemZip = new ZipFilesPlugin(zipFile);
         zipPlugins.push(itemZip);
       });
     });
@@ -216,21 +343,27 @@ function generateZips() {
 
 // Let's build something
 
+// Ensure that there is a .gitkeep, the webpack runs "packing" .gitkeep
+touch('.gitkeep');
+
 // Global constant definitions (.env)
 definitions = loadEnvironmentDefinitions();
 
+// Clean the development assets before packing
+cleanDevAssets();
+
 // Start clean
-removeReleaseDirectory();
+buildPlugins.push(removeReleaseDirectory());
 
 // Render the manifests and translations
 buildPlugins.push(renderTemplates());
 
 if (isPackageType()) {
   // Define the package generation
-  buildPlugins.push(generatePackage());
+  buildPlugins.push(declarePackageGeneration());
 } else {
   // Just define the zips with everything
-  buildPlugins = buildPlugins.concat(generateZips());
+  buildPlugins = buildPlugins.concat(declareZipsGeneration());
 }
 
 // We are ready, Webpack generate!

@@ -1,13 +1,11 @@
 <?php
-
-/*
- * @package     XT Laravel Lumen for Joomla
+/**
+ * @package    [EXTENSION_NAME]
  *
- * @author      Extly, CB. <team@extly.com>
- * @copyright   Copyright (c)2007-2019 Extly, CB. All rights reserved.
- * @license     http://www.gnu.org/licenses/gpl-2.0.html  GNU/GPLv2
- *
- * @see         https://www.extly.com
+ * @author     [AUTHOR] <[AUTHOR_EMAIL]>
+ * @copyright  [COPYRIGHT]
+ * @license    [LICENSE]
+ * @link       [AUTHOR_URL]
  */
 
 use Joomla\CMS\MVC\Controller\BaseController;
@@ -15,10 +13,9 @@ use Joomla\CMS\MVC\Controller\BaseController;
 defined('_JEXEC') or die;
 
 /**
- * XTLumen Controller.
+ * Foo Controller.
  *
+ * @package  [EXTENSION_NAME]
  * @since    1.0
  */
-class XTLumenController extends BaseController
-{
-}
+class FooController extends BaseController { }
