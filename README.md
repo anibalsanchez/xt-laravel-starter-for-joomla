@@ -7,15 +7,17 @@ $ composer global require laravel/installer
 
 $ laravel new blog
 
+$ php artisan key:generate
+
 $ composer require laravel/ui
 
 $ composer require laravel-frontend-presets/tailwindcss --dev
 
-$ php artisan key:generate
+$ php artisan ui tailwindcss
 
 $ npm install
 
-$ npm run prod
+$ npm run production
 
 $ php artisan serve
 ```
