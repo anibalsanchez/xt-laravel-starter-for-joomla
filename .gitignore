@@ -36,3 +36,6 @@ node_modules/
 /component/language/*
 /modules/*/*/language/*
 /plugins/*/*/language/*
+
+# Laravel
+/library/.env
