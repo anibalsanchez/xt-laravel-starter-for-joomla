@@ -1,7 +1,21 @@
 <?php
 
-return [
+/*
+ * @package    XT Laravel Starter for Joomla
+ *
+ * @author     Extly, CB <team@extly.com>
+ * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
+ * @license    GNU General Public License version 3 or later; see LICENSE.txt
+ * @link       https://www.extly.com
+ */
 
+use Joomla\CMS\Factory as CMSFactory;
+use Joomla\CMS\Uri\Uri as CMSUri;
+
+$config = CMSFactory::getConfig();
+$rootUrl = CMSUri::root();
+
+return [
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -13,7 +27,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', $config->get('sitename', 'Laravel')),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +53,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', '1' === $config->get('debug')),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,9 +66,10 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', $rootUrl),
 
-    'asset_url' => env('ASSET_URL', null),
+    'asset_url' => env('ASSET_URL', $rootUrl.'/media/lib_xtlaravelstarter/public'),
+    'mix_url' => env('MIX_URL', $rootUrl.'/media/lib_xtlaravelstarter/public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -119,7 +134,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', 'base64:'.base64_encode(substr(sha1($config->get('secret')), 8))),
 
     'cipher' => 'AES-256-CBC',
 
@@ -135,10 +150,7 @@ return [
     */
 
     'providers' => [
-
-        /*
-         * Laravel Framework Service Providers...
-         */
+        // Laravel Framework Service Providers...
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -162,19 +174,14 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        /*
-         * Package Service Providers...
-         */
+        // Package Service Providers...
 
-        /*
-         * Application Service Providers...
-         */
+        // Application Service Providers...
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
     ],
 
     /*
@@ -189,7 +196,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -226,7 +232,5 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
     ],
-
 ];

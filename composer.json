@@ -1,6 +1,6 @@
 {
-    "name": "extly/[EXTENSION_ALIAS]",
-    "description": "[EXTENSION_DESC]",
+    "name": "extly/xtlaravelstarter",
+    "description": "This project is a good starting point to begin using the Laravel Framework on Joomla.",
     "authors": [
         {
             "name": "Extly CB",
@@ -36,7 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "[EXTENSION_NAMESPACE]\\": "library/src/"
+            "Extly\\": "library/src/"
         }
     },
     "autoload-dev": {

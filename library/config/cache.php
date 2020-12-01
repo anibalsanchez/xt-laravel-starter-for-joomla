@@ -1,9 +1,20 @@
 <?php
 
+/*
+ * @package    XT Laravel Starter for Joomla
+ *
+ * @author     Extly, CB <team@extly.com>
+ * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
+ * @license    GNU General Public License version 3 or later; see LICENSE.txt
+ * @link       https://www.extly.com
+ */
+
 use Illuminate\Support\Str;
+use Joomla\CMS\Factory as CMSFactory;
+
+$config = CMSFactory::getConfig();
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Cache Store
@@ -32,7 +43,6 @@ return [
     */
 
     'stores' => [
-
         'apc' => [
             'driver' => 'apc',
         ],
@@ -85,7 +95,6 @@ return [
             'table' => env('DYNAMODB_CACHE_TABLE', 'cache'),
             'endpoint' => env('DYNAMODB_ENDPOINT'),
         ],
-
     ],
 
     /*
@@ -99,6 +108,5 @@ return [
     |
     */
 
-    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache'),
-
+    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', $config->get('sitename', 'Laravel')), '_').'_cache'),
 ];

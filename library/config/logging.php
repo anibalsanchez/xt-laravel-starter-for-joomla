@@ -1,11 +1,22 @@
 <?php
 
+/*
+ * @package    XT Laravel Starter for Joomla
+ *
+ * @author     Extly, CB <team@extly.com>
+ * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
+ * @license    GNU General Public License version 3 or later; see LICENSE.txt
+ * @link       https://www.extly.com
+ */
+
+use Joomla\CMS\Factory as CMSFactory;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
-return [
+$config = CMSFactory::getConfig();
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Log Channel
@@ -43,13 +54,13 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => $config->get('log_path').'/laravel.log',
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => $config->get('log_path').'/laravel.log',
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
@@ -97,8 +108,7 @@ return [
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'path' => $config->get('log_path').'/laravel.log',
         ],
     ],
-
 ];

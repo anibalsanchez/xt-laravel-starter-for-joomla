@@ -1,7 +1,15 @@
 <?php
 
-return [
+/*
+ * @package    XT Laravel Starter for Joomla
+ *
+ * @author     Extly, CB <team@extly.com>
+ * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
+ * @license    GNU General Public License version 3 or later; see LICENSE.txt
+ * @link       https://www.extly.com
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -29,7 +37,6 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -51,7 +58,6 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
-
     ],
 
     /*
@@ -68,5 +74,4 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
-
 ];

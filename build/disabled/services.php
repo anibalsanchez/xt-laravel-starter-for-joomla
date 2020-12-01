@@ -1,7 +1,15 @@
 <?php
 
-return [
+/*
+ * @package    XT Laravel Starter for Joomla
+ *
+ * @author     Extly, CB <team@extly.com>
+ * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
+ * @license    GNU General Public License version 3 or later; see LICENSE.txt
+ * @link       https://www.extly.com
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -29,5 +37,4 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
 ];

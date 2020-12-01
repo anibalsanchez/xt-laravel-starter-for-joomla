@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8.0" type="package" method="upgrade">
+  <packagename>xtlaravelstarter</packagename>
+  <packager>Extly, CB</packager>
+  <packagerurl>https://www.extly.com</packagerurl>
+  <name>XT Laravel Starter for Joomla</name>
+  <description>XT Laravel Starter for Joomla. This project is a good starting point to begin using the Laravel Framework on Joomla.</description>
+  <version>1.0.0</version>
+  <creationDate>2020-12-01</creationDate>
+
+	<author>Extly, CB</author>
+	<authorEmail>team@extly.com</authorEmail>
+	<authorUrl>https://www.extly.com</authorUrl>
+	<copyright>Copyright (c)2012-2020 Extly, CB All rights reserved.</copyright>
+	<license>GNU/GPLv2 www.gnu.org/licenses/gpl-2.0.html</license>
+
+  <!-- List of extensions to install -->
+  <files>
+    <!-- Component -->
+    <file type="component" id="com_xtlaravelstarter">component</file>
+
+    <!-- Library -->
+    <file type="library" id="xtlaravelstarter">library</file>
+  </files>
+  <!-- Installation script -->
+  <scriptfile>script.xtlaravelstarter.php</scriptfile>
+  <!-- Update servers -->
+  <updateservers>
+    <server type="extension" priority="1" name="XT Laravel Starter for Joomla">https://cdn.extly.com/update-pkg_xtlaravelstarter.xml</server>
+  </updateservers>
+</extension>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8.0" type="package" method="upgrade">
+  <packagename>[EXTENSION_ALIAS]</packagename>
+  <packager>Extly, CB</packager>
+  <packagerurl>https://www.extly.com</packagerurl>
+  <name>XT Laravel Starter for Joomla</name>
+  <description>[EXTENSION_DESC]</description>
+  <version>[RELEASE_VERSION]</version>
+  <creationDate>[DATE]</creationDate>
+
+[MANIFEST_COPYRIGHT]
+
+  <!-- List of extensions to install -->
+  <files>
+    <!-- Component -->
+    <file type="component" id="com_[EXTENSION_ALIAS]">component</file>
+
+    <!-- Library -->
+    <file type="library" id="[EXTENSION_ALIAS]">library</file>
+  </files>
+  <!-- Installation script -->
+  <scriptfile>script.[EXTENSION_ALIAS].php</scriptfile>
+  <!-- Update servers -->
+  <updateservers>
+    <server type="extension" priority="1" name="XT Laravel Starter for Joomla">[EXTENSION_CDN]/update-pkg_[EXTENSION_ALIAS].xml</server>
+  </updateservers>
+</extension>

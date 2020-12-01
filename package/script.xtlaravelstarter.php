@@ -1,5 +1,13 @@
 <?php
-// [PHP_COPYRIGHT]
+/**
+ * @package    XT Laravel Starter for Joomla
+ *
+ * @author     Extly, CB <team@extly.com>
+ * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @link       https://www.extly.com
+ */
+
 
 /**
  *  This program is free software: you can redistribute it and/or modify
@@ -25,26 +33,26 @@ use \Joomla\CMS\Log\Log as Log;
 use \Joomla\CMS\Cache\Cache as CMSCache;
 
 /**
- * Foo InstallerScript.
+ * XtLaravelStarter InstallerScript.
  *
- * @package  [EXTENSION_NAME]
+ * @package  XT Laravel Starter for Joomla
  * @since    1.0
  */
-class Pkg_[EXTENSION_CLASS_NAME]InstallerScript
+class Pkg_XtLaravelStarterInstallerScript
 {
 	/**
 	 * The name of our package, e.g. pkg_example. Used for dependency tracking.
 	 *
 	 * @var  string
 	 */
-	protected $packageName = 'pkg_[EXTENSION_ALIAS]';
+	protected $packageName = 'pkg_xtlaravelstarter';
 
 	/**
 	 * The minimum PHP version required to install this extension
 	 *
 	 * @var   string
 	 */
-	protected $minimumPHPVersion = '7.2.0';
+	protected $minimumPHPVersion = '7.3.0';
 
 	/**
 	 * The minimum Joomla! version required to install this extension
@@ -67,7 +75,7 @@ class Pkg_[EXTENSION_CLASS_NAME]InstallerScript
 	 * @var array
 	 */
 	protected $extensionsToEnable = array(
-		// ['plugin', '[EXTENSION_ALIAS]', 1, 'system' ],
+		// ['plugin', 'xtlaravelstarter', 1, 'system' ],
 	);
 
 	/**

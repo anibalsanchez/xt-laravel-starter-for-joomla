@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <extension method="upgrade" type="library" version="1.0">
-  <name>[EXTENSION_NAME] Library</name>
+  <name>XT Laravel Starter for Joomla Library</name>
   <libraryname>[EXTENSION_ALIAS]</libraryname>
   <version>[RELEASE_VERSION]</version>
   <creationDate>[DATE]</creationDate>
@@ -21,7 +21,7 @@
     <filename>artisan</filename>
     <filename>composer.json</filename>
     <filename>composer.lock</filename>
-    <filename>lib_foo.xml</filename>
+    <filename>lib_xtlaravelstarter.xml</filename>
     <filename>package-lock.json</filename>
     <filename>package.json</filename>
     <filename>phpunit.xml</filename>
@@ -35,6 +35,7 @@
     <folder>database</folder>
     <folder>resources</folder>
     <folder>routes</folder>
+    <folder>storage</folder>
     <folder>vendor</folder>
     <folder>vendor_prefixed</folder>
   </files>

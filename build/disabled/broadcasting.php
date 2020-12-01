@@ -1,7 +1,15 @@
 <?php
 
-return [
+/*
+ * @package    XT Laravel Starter for Joomla
+ *
+ * @author     Extly, CB <team@extly.com>
+ * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
+ * @license    GNU General Public License version 3 or later; see LICENSE.txt
+ * @link       https://www.extly.com
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Broadcaster
@@ -29,7 +37,6 @@ return [
     */
 
     'connections' => [
-
         'pusher' => [
             'driver' => 'pusher',
             'key' => env('PUSHER_APP_KEY'),
@@ -58,7 +65,5 @@ return [
         'null' => [
             'driver' => 'null',
         ],
-
     ],
-
 ];

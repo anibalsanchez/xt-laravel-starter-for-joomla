@@ -1,13 +1,5 @@
 <?php
-/**
- * @package    Foo Name
- *
- * @author     Extly, CB <team@extly.com>
- * @copyright  Copyright (c)2012-2020 Extly, CB All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * @link       https://www.extly.com
- */
-
+// [PHP_COPYRIGHT]
 
 /**
  *  This program is free software: you can redistribute it and/or modify
@@ -33,26 +25,26 @@ use \Joomla\CMS\Log\Log as Log;
 use \Joomla\CMS\Cache\Cache as CMSCache;
 
 /**
- * Foo InstallerScript.
+ * XtLaravelStarter InstallerScript.
  *
- * @package  Foo Name
+ * @package  XT Laravel Starter for Joomla
  * @since    1.0
  */
-class Pkg_FooInstallerScript
+class Pkg_[EXTENSION_CLASS_NAME]InstallerScript
 {
 	/**
 	 * The name of our package, e.g. pkg_example. Used for dependency tracking.
 	 *
 	 * @var  string
 	 */
-	protected $packageName = 'pkg_foo';
+	protected $packageName = 'pkg_[EXTENSION_ALIAS]';
 
 	/**
 	 * The minimum PHP version required to install this extension
 	 *
 	 * @var   string
 	 */
-	protected $minimumPHPVersion = '7.1.0';
+	protected $minimumPHPVersion = '7.3.0';
 
 	/**
 	 * The minimum Joomla! version required to install this extension
@@ -75,7 +67,7 @@ class Pkg_FooInstallerScript
 	 * @var array
 	 */
 	protected $extensionsToEnable = array(
-		// ['plugin', 'foo', 1, 'system' ],
+		// ['plugin', '[EXTENSION_ALIAS]', 1, 'system' ],
 	);
 
 	/**
