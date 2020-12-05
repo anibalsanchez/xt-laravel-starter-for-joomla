@@ -5,7 +5,10 @@ npm install
 
 cd library
 
-# Install Composer libs
+# Install the latest library updates
+git fetch
+git reset --hard
+
 composer update --no-dev
 mkdir -p vendor_prefixed
 touch vendor_prefixed/.gitkeep
