@@ -18,14 +18,9 @@
   <files>
     <filename>lib_[EXTENSION_ALIAS].xml</filename>
 
-    <filename>artisan</filename>
-    <filename>composer.json</filename>
-    <filename>composer.lock</filename>
     <filename>lib_xtlaravelstarter.xml</filename>
     <filename>package-lock.json</filename>
     <filename>package.json</filename>
-    <filename>phpunit.xml</filename>
-    <filename>server.php</filename>
     <filename>tailwind.config.js</filename>
     <filename>webpack.mix.js</filename>
 

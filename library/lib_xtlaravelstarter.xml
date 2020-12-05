@@ -3,7 +3,7 @@
   <name>XT Laravel Starter for Joomla Library</name>
   <libraryname>xtlaravelstarter</libraryname>
   <version>1.0.0</version>
-  <creationDate>2020-12-01</creationDate>
+  <creationDate>2020-12-05</creationDate>
 
 	<author>Extly, CB</author>
 	<authorEmail>team@extly.com</authorEmail>
@@ -22,14 +22,9 @@ XT Laravel Starter for Joomla. This project is a good starting point to begin us
   <files>
     <filename>lib_xtlaravelstarter.xml</filename>
 
-    <filename>artisan</filename>
-    <filename>composer.json</filename>
-    <filename>composer.lock</filename>
     <filename>lib_xtlaravelstarter.xml</filename>
     <filename>package-lock.json</filename>
     <filename>package.json</filename>
-    <filename>phpunit.xml</filename>
-    <filename>server.php</filename>
     <filename>tailwind.config.js</filename>
     <filename>webpack.mix.js</filename>
 
