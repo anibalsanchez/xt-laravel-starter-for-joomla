@@ -22,6 +22,8 @@ $ npm run production
 $ php artisan serve
 ```
 
+git clone git@github.com:anibalsanchez/xt-laravel-starter-for-joomla-library.git library
+
 ## tl;dr
 
 ```
