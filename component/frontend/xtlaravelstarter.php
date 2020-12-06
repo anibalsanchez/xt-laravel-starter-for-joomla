@@ -71,10 +71,24 @@ require JPATH_XTLARAVELSTARTER_LIBRARY.'/vendor/autoload.php';
 
 $app = require_once JPATH_XTLARAVELSTARTER_LIBRARY.'/bootstrap/app.php';
 
-$kernel = $app->make(Kernel::class);
+// Development mode
+if (class_exists('Illuminate\Contracts\Http\Kernel')) {
+    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
-$response = tap($kernel->handle(
-    $request = Request::capture()
+    $response = tap($kernel->handle(
+        $request = Illuminate\Http\Request::capture()
+    ))->send();
+
+    $kernel->terminate($request, $response);
+
+    return;
+}
+
+// Production prefixed mode
+$kernel = $app->make(Extly\Illuminate\Contracts\Http\Kernel::class);
+
+$response = XT_tap($kernel->handle(
+    $request = Extly\Illuminate\Http\Request::capture()
 ))->send();
 
 $kernel->terminate($request, $response);

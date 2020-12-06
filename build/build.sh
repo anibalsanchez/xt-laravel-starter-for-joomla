@@ -6,12 +6,13 @@ npm install
 cd library
 
 # Install the latest library updates
-git fetch
-git reset --hard
+# git checkout prefixed
+# git fetch
+# git reset --hard
 
-composer update --no-dev
-mkdir -p vendor_prefixed
-touch vendor_prefixed/.gitkeep
+# composer update --no-dev
+# mkdir -p vendor_prefixed
+# touch vendor_prefixed/.gitkeep
 
 # Install the Library's own build scripts
 npm install
