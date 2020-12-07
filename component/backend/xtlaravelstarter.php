@@ -80,7 +80,7 @@ require JPATH_XTLARAVELSTARTER_LIBRARY.'/vendor/autoload.php';
 $app = require_once JPATH_XTLARAVELSTARTER_LIBRARY.'/bootstrap/app.php';
 
 // Development mode
-if (class_exists('Illuminate\Contracts\Http\Kernel')) {
+if (interface_exists('Illuminate\Contracts\Http\Kernel')) {
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
     $response = tap($kernel->handle(

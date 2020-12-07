@@ -3,16 +3,14 @@
 # Install the core build scripts
 npm install
 
-cd library
-
 # Install the latest library updates
-git checkout prefixed
-git fetch
-git reset --hard
+rm -rf library
+git clone git@github.com:anibalsanchez/xt-laravel-starter-for-joomla-library.git library
 
+cd library
+git checkout prefixed
 composer update --no-dev
-mkdir -p vendor_prefixed
-touch vendor_prefixed/.gitkeep
+composer dump-autoload --classmap-authoritative
 
 # Install the Library's own build scripts
 npm install
