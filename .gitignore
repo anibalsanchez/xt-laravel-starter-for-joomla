@@ -38,4 +38,4 @@ node_modules/
 /plugins/*/*/language/*
 
 # Laravel
-/library/.env
+/library
